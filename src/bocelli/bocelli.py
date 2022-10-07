@@ -20,7 +20,9 @@ class Bocelli:
     
     def _onListenRequest(self, msg):
         result = self.speaker.Listen(msg.duration)
-        self.publishers["listen_result"].publish(result)
+        out = ListenResult()
+        out.result = result
+        self.publishers["listen_result"].publish(out)
 
     def main(*args, **kwargs):
         rospy.init_node('bocelli')
