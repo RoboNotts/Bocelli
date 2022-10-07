@@ -13,10 +13,10 @@ class Speaker:
         self.engine.say(command)
         self.engine.runAndWait()
         
-    def Listen(self):
+    def Listen(self, dur):
         with sr.Microphone() as source:
             self.Speak("Please give me a moment.")
-            self.r.adjust_for_ambient_noise(source, duration=3)
+            self.r.adjust_for_ambient_noise(source, duration=dur)
             self.Speak("Okay, tell me what you're doing please.")
             print("listening") #prints
             audio = self.r.listen(source)
