@@ -5,9 +5,9 @@ class Speaker:
     
     def __init__(self):
         self.r = sr.Recognizer()
-        self.engine = pyttsx3.init() 
+        self.engine = pyttsx3.init("espeak") 
         voices = self.engine.getProperty("voices") 
-        self.engine.setProperty("voice", voices[1].id) 
+        self.engine.setProperty("voice", voices[11].id) 
 
     def Speak(self, command):
         self.engine.say(command)
@@ -22,7 +22,7 @@ class Speaker:
             audio = self.r.listen(source)
             text = self.r.recognize_google(audio)
         return text
-        
+
 if __name__ == "__main__":
     try:
         test = Speaker()
