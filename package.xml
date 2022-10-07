@@ -55,8 +55,7 @@
 
   <build_export_depend>python-speechrecognition-pip</build_export_depend>
   <exec_depend>python-speechrecognition-pip</exec_depend>
-  <build_export_depend>python-pyttsx3-pip</build_export_depend>
-  <exec_depend>python-pyttsx3-pip</exec_depend>
+
 
   <!-- The export tag contains other, unspecified, tags -->
   <export> 
