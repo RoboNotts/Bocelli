@@ -1,31 +1,30 @@
 import speech_recognition as sr
 import pyttsx3
 
-r = sr.Recognizer()
-
 #for index, name in enumerate(sr.Microphone.list_microphone_names()):
 #    print(f'{index}, {name}')
-
-def Speak(command):
-    engine = pyttsx3.init()
-    engine.say(command)
-    engine.runAndWait()
+class Speaker:
     
-def Listen():
-    Speak("Please give me a moment.")
-    r.adjust_for_ambient_noise(source, duration=3)
-    Speak("Okay, tell me what you're doing please.")
-    print("listening") #prints
-    audio=r.listen(source)
-    text=r.recognize_google(audio)
-    return text
+    def __init__(self):
+        self.r = sr.Recognizer()
+        self.engine = pyttsx3.init()    
+
+    def Speak(self, command):
+        self.engine.say(command)
+        self.engine.runAndWait()
+        
+    def Listen(self):
+        with sr.Microphone() as source:
+            self.Speak("Please give me a moment.")
+            self.r.adjust_for_ambient_noise(source, duration=3)
+            self.Speak("Okay, tell me what you're doing please.")
+            print("listening") #prints
+            audio = self.r.listen(source)
+            text = self.r.recognize_google(audio)
+        return text
 
 try:
-    with sr.Microphone() as source:
-        text=Listen()
-        
-        print(text)
-        #Speak(text)
-        
+    test = Speaker()
+    print(test.Listen())
 except Exception as e:
     print(e)
