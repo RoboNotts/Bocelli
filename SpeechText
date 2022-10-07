@@ -12,6 +12,9 @@ def Speak(command):
     engine.runAndWait()
     
 def Listen():
+    Speak("Please give me a moment.")
+    r.adjust_for_ambient_noise(source, duration=3)
+    Speak("Okay, tell me what you're doing please.")
     print("listening") #prints
     audio=r.listen(source)
     text=r.recognize_google(audio)
@@ -19,9 +22,6 @@ def Listen():
 
 try:
     with sr.Microphone() as source:
-        Speak("Please give me a moment.")
-        r.adjust_for_ambient_noise(source, duration=3)
-        Speak("Okay, tell me what you're doing please.")
         text=Listen()
         
         print(text)
