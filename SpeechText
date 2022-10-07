@@ -1,13 +1,13 @@
 import speech_recognition as sr
 import pyttsx3
 
-#for index, name in enumerate(sr.Microphone.list_microphone_names()):
-#    print(f'{index}, {name}')
 class Speaker:
     
     def __init__(self):
         self.r = sr.Recognizer()
-        self.engine = pyttsx3.init()    
+        self.engine = pyttsx3.init() 
+        voices = self.engine.getProperty("voices") 
+        self.engine.setProperty("voice", voices[1].id) 
 
     def Speak(self, command):
         self.engine.say(command)
