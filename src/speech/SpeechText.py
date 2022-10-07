@@ -22,9 +22,10 @@ class Speaker:
             audio = self.r.listen(source)
             text = self.r.recognize_google(audio)
         return text
-
-try:
-    test = Speaker()
-    print(test.Listen())
-except Exception as e:
-    print(e)
+        
+if __name__ == "__main__":
+    try:
+        test = Speaker()
+        print(test.Listen(5))
+    except Exception as e:
+        print(e)
