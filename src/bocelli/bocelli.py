@@ -16,7 +16,7 @@ class Bocelli:
         }
     
     def _onSpeechRequest(self, msg):
-        self.speaker.Speak(msg)
+        self.speaker.Speak(msg.result)
     
     def _onListenRequest(self, msg):
         result = self.speaker.Listen(msg.duration)
