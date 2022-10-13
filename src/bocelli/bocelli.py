@@ -3,6 +3,7 @@ import rospy
 from speech.SpeechText import Speaker
 from bocelli.msg import ListenResult, SpeechRequest, ListenRequest
 
+# ROS node to interface with speaking/listening
 class Bocelli:
     def __init__(self):
         self.speaker = Speaker()
