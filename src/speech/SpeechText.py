@@ -1,14 +1,17 @@
 import speech_recognition as sr
 import pyttsx3
+from time import sleep as zzz
 
 # Provides speaking and listening services
 class Speaker:
     
     def __init__(self):
         self.r = sr.Recognizer()
-        self.engine = pyttsx3.init("espeak") 
+        self.engine = pyttsx3.init()
         voices = self.engine.getProperty("voices") 
-        self.engine.setProperty("voice", voices[11].id) 
+        self.engine.setProperty("voice", voices[14].id) 
+        self.engine.setProperty("rate", 110)
+        self.engine.setProperty("volume", 2)
 
     # Uses text-to-speech to say something
     def Speak(self, command):
@@ -26,10 +29,18 @@ class Speaker:
             text = self.r.recognize_google(audio)
         return text
 
+    def test(self):
+        for i in range(19, 50):
+            self.engine.setProperty("rate", 130)
+            voices = self.engine.getProperty("voices") 
+            self.engine.setProperty("voice", voices[i].id) 
+            self.Speak(f"This is voice {i}. Testing testing")
+            zzz(0.1)
+
 # Testing
 if __name__ == "__main__":
     try:
         test = Speaker()
-        print(test.Listen(5))
+        print(test.test())
     except Exception as e:
         print(e)
