@@ -1,4 +1,3 @@
-from urllib import robotparser
 import rospy
 from speech.SpeechText import Speaker
 from bocelli.srv import Listen, Speak, SpeakResponse, ListenResponse
