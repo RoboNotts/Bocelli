@@ -13,17 +13,23 @@ class Speaker:
         self.engine.setProperty("rate", 110)
         self.engine.setProperty("volume", 2)
 
+        self._adjustMicrophone(3)
+
     # Uses text-to-speech to say something
     def Speak(self, command):
         self.engine.say(command)
         self.engine.runAndWait()
+
+    def _adjustMicrophone(self, dur):
+        self.Speak("Please give me a moment.")
+        with sr.Microphone() as source:
+            self.r.adjust_for_ambient_noise(source, duration=dur)
+        self.Speak("Adjustment Complete.")
         
     # Listens for a set amount of time, and returns what was said to it.
     def Listen(self, dur):
         with sr.Microphone() as source:
-            self.Speak("Please give me a moment.")
-            self.r.adjust_for_ambient_noise(source, duration=dur)
-            self.Speak("Okay, tell me what you're doing please.") # Temporary addition for METRICS
+            # self.Speak("Okay, tell me what you're doing please.") # Temporary addition for METRICS
             print("listening") #prints
             audio = self.r.listen(source)
             text = self.r.recognize_google(audio)
