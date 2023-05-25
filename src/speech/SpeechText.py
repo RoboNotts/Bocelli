@@ -37,10 +37,10 @@ class Speaker:
         sleep(sleeptime)
 
     def _adjustMicrophone(self, dur):
-        self.Speak("Please give me a moment.")
+        self.speak("Please give me a moment.")
         with sr.Microphone() as source:
             self.r.adjust_for_ambient_noise(source, duration=dur)
-        self.Speak("Adjustment Complete.")
+        self.speak("Adjustment Complete.")
         
     # Listens for a set amount of time, and returns what was said to it.
     def Listen(self, dur):
@@ -51,17 +51,13 @@ class Speaker:
         return text
 
     def test(self):
-        for i in range(19, 50):
-            self.engine.setProperty("rate", 130)
-            voices = self.engine.getProperty("voices") 
-            self.engine.setProperty("voice", voices[i].id) 
-            self.Speak(f"This is voice {i}. Testing testing")
-            zzz(0.1)
+        self.speak(f"Testing testing")
+        sleep(0.1)
 
 # Testing
 if __name__ == "__main__":
     try:
         test = Speaker()
-        print(test.test())
+        test.test()
     except Exception as e:
         print(e)
