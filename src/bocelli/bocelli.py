@@ -1,6 +1,7 @@
 import rospy
 from speech.SpeechText import Speaker
-from bocelli.srv import Listen, Speak, SpeakResponse, ListenResponse
+from Bocelli.src.andrea import interactions
+from Bocelli.srv import Listen, Speak, SpeakResponse, ListenResponse
 
 #http://10.0.1.10:11311
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-from bocelli import Bocelli
+from Bocelli import Bocelli
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Bocelli provides a simple node to speak and listen to people")
