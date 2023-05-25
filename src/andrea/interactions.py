@@ -3,12 +3,17 @@ from time import sleep as zzz
 import os
 import openai
 
-PROJECT_ID = "happyhri"
-GOOGLE_CLOUD_KEY_JSON = "SET THIS"
+PROJECT_ID = "DEFAULT"
+GOOGLE_CLOUD_KEY_JSON = "DEFAULT"
 GOOGLE_CREDENTIALS = os.environ.setdefault('GOOGLE_APPLICATION_CREDENTIALS', GOOGLE_CLOUD_KEY_JSON)
 
 # Andrea provides HRI
 def dialogeFlowProcess(inputText, languageCode="en", sessionID="unique", projectID=PROJECT_ID):
+    
+    if PROJECT_ID == "DEFAULT" or GOOGLE_CLOUD_KEY_JSON == "DEFAULT":
+        print("DIALOGFLOW KEYS NOT INITIALIZED")
+        return "ERROR"
+    
     sessionClient = df.SessionsClient()
     session = sessionClient.session_path(projectID, sessionID)
 
@@ -47,6 +52,10 @@ COMMAND_PROMPT = """
 """
 
 def GPTResponse(inputText):
+    if os.getenv("OPENAI_API_KEY") == None:
+        print("GPT KEYS NOT INITIALIZED")
+        return "ERROR"
+    
     messages = [
         {"role": "user", "content": COMMAND_PROMPT},
     ]
