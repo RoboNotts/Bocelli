@@ -38,8 +38,9 @@ class dialogeFlowInterface:
 
         args = modelOutput.split(":")[1].split(",")
 
-        if command != "FETCH":
+        if command == "NO-COMMAND":
             command = "REPLY"
+            args[0] = text
 
         return (command, args)
 
