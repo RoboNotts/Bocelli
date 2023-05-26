@@ -1,7 +1,6 @@
 import rospy
 from speech.SpeechText import Speaker
-from Bocelli.src.andrea import interactions
-from Bocelli.srv import Listen, Speak, SpeakResponse, ListenResponse
+from bocelli.srv import Listen, Speak, SpeakResponse, ListenResponse
 
 #http://10.0.1.10:11311
 
@@ -16,11 +15,11 @@ class Bocelli:
         }
     
     def _onSpeechRequest(self, msg):
-        self.speaker.Speak(msg.request)
+        self.speaker.speak(msg.request)
         return SpeakResponse(1)
     
     def _onListenRequest(self, msg):
-        result = self.speaker.Listen(msg.duration)
+        result = self.speaker.listen(msg.duration)
         out = ListenResponse()
         out.result = result
         return out
