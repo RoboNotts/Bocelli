@@ -1,5 +1,5 @@
 import rospy
-from speech.SpeechText import Speaker
+from bocelli.speech.SpeechText import Speaker
 from bocelli.srv import Listen, Speak, SpeakResponse, ListenResponse
 
 #http://10.0.1.10:11311
