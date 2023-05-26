@@ -56,11 +56,17 @@
 
   <build_export_depend>python-speechrecognition-pip</build_export_depend>
   <exec_depend>python-speechrecognition-pip</exec_depend>
+
   <build_export_depend>python-gTTS-pip</build_export_depend>
   <exec_depend>python-gTTS-pip</exec_depend>
-  <build_export_depend>python-google-cloud-dialogflow-pip</build_export_depend>
-  <exec_depend>python-google-cloud-dialogflow-pip</exec_depend>
 
+  <build_export_depend>python-openai-pip</build_export_depend>
+  <exec_depend>python-openai-pip</exec_depend>
+
+  <build_export_depend>python-pygame</build_export_depend>
+  <exec_depend>python-pygame</exec_depend>
+
+  
 
   <!-- The export tag contains other, unspecified, tags -->
   <export> 
