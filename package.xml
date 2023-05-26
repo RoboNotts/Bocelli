@@ -66,7 +66,8 @@
   <build_export_depend>python-pygame</build_export_depend>
   <exec_depend>python-pygame</exec_depend>
 
-  
+  <!-- DO these:
+    pip install google-cloud-dialogflow-->
 
   <!-- The export tag contains other, unspecified, tags -->
   <export> 
