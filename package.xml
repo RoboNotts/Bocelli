@@ -60,8 +60,8 @@
   <build_export_depend>python-gTTS-pip</build_export_depend>
   <exec_depend>python-gTTS-pip</exec_depend>
 
-  <build_export_depend>python-openai-pip</build_export_depend>
-  <exec_depend>python-openai-pip</exec_depend>
+  <!-- <build_export_depend>python-openai-pip</build_export_depend>
+  <exec_depend>python-openai-pip</exec_depend> -->
 
   <build_export_depend>python-pygame</build_export_depend>
   <exec_depend>python-pygame</exec_depend>
