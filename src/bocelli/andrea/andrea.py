@@ -23,7 +23,7 @@ class Andrea:
         
         reply = self.dfInterface.dialogFlowProcess(msg.request)
 
-        return RequestResponse(reply.split(":"))
+        return RequestResponse(reply)
     
     def _onCmmRequest(self, msg):
         reply = self.dfInterface.processUserCommand(msg.request)
