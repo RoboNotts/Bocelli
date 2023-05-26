@@ -3,7 +3,6 @@ from gtts import gTTS
 from tempfile import TemporaryFile
 from pygame import mixer
 from time import sleep
-import os
 
 # APPROXIMATE READING TIME
 def speakDuration(text):
@@ -19,7 +18,8 @@ class Speaker:
     
     def __init__(self):
         self.r = sr.Recognizer()
-        self._adjustMicrophone(3)
+        self.mic = sr.Microphone()
+        self.adjustMicrophone(3)
 
     # Uses text-to-speech to say something
     def speak(self, text):
@@ -36,18 +36,19 @@ class Speaker:
         sleeptime=speakDuration(text)
         sleep(sleeptime)
 
-    def _adjustMicrophone(self, dur):
+    def adjustMicrophone(self, dur):
         self.speak("Please give me a moment.")
-        with sr.Microphone() as source:
+        with self.mic as source:
             self.r.adjust_for_ambient_noise(source, duration=dur)
-        self.speak("Adjustment Complete.")
+        self.speak("Microphone Adjustment Complete")
         
     # Listens for a set amount of time, and returns what was said to it.
-    def Listen(self, dur):
-        with sr.Microphone() as source:
+    def listen(self, dur):
+        with self.mic as source:
             print("listening") #prints
             audio = self.r.listen(source)
             text = self.r.recognize_google(audio)
+            print("done")
         return text
 
     def test(self):

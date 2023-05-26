@@ -59,6 +59,7 @@ add_service_files(
   FILES
   Speak.srv
   Listen.srv
+  Request.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -105,7 +106,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES bocelli
-#  CATKIN_DEPENDS rospy
+   CATKIN_DEPENDS rospy message_runtime
 #  DEPENDS system_lib
 )
 
@@ -161,6 +162,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   nodes/bocelli_node
+  nodes/andrea_node
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

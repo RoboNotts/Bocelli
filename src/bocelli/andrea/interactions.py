@@ -3,42 +3,45 @@ from time import sleep as zzz
 import os
 import openai
 
-PROJECT_ID = "DEFAULT"
-GOOGLE_CLOUD_KEY_JSON = "DEFAULT"
-GOOGLE_CREDENTIALS = os.environ.setdefault('GOOGLE_APPLICATION_CREDENTIALS', GOOGLE_CLOUD_KEY_JSON)
+class dialogeFlowInterface:
+    def __init__(self):
+
+        self.PROJECT_ID = "happyhri"
+        self.GOOGLE_CLOUD_KEY_PATH = "/home/chart1/metrics_ws/src/Bocelli/src/bocelli/andrea/happyhri-fca2f769cb8f.json"
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = self.GOOGLE_CLOUD_KEY_PATH
 
 # Andrea provides HRI
-def dialogeFlowProcess(inputText, languageCode="en", sessionID="unique", projectID=PROJECT_ID):
-    
-    if PROJECT_ID == "DEFAULT" or GOOGLE_CLOUD_KEY_JSON == "DEFAULT":
-        print("DIALOGFLOW KEYS NOT INITIALIZED")
-        return "ERROR"
-    
-    sessionClient = df.SessionsClient()
-    session = sessionClient.session_path(projectID, sessionID)
+    def dialogFlowProcess(self, inputText, languageCode="en", sessionID="unique"):
+        
+        if self.PROJECT_ID == "DEFAULT":
+            print("DIALOGFLOW KEYS NOT INITIALIZED")
+            return "ERROR"
+        
+        sessionClient = df.SessionsClient()
+        session = sessionClient.session_path(self.PROJECT_ID, sessionID)
 
-    dfText = df.TextInput(text=inputText, language_code=languageCode)
-    query = df.QueryInput(text=dfText)
-    reply = sessionClient.detect_intent(session=session, query_input=query)
+        dfText = df.TextInput(text=inputText, language_code=languageCode)
+        query = df.QueryInput(text=dfText)
+        reply = sessionClient.detect_intent(session=session, query_input=query)
 
-    print("DialogeFlow Response:", reply.query_result.fulfillment_text)
+        print("DialogeFlow Response:", reply.query_result.fulfillment_text)
 
-    return reply.query_result.fulfillment_text
+        return reply.query_result.fulfillment_text
 
-# Takes a user command through dialogflow and returns what should be done
-def processUserCommand(text):
-    
-    modelOutput = dialogeFlowProcess(text)
-    if modelOutput == []:
-        return
-    command = modelOutput.split(":")[0]
+    # Takes a user command through dialogflow and returns what should be done
+    def processUserCommand(self, text):
+        
+        modelOutput = self.dialogeFlowProcess(text)
+        if modelOutput == []:
+            return
+        command = modelOutput.split(":")[0]
 
-    args = modelOutput.split(":")[1].split(",")
+        args = modelOutput.split(":")[1].split(",")
 
-    if command != "FETCH":
-        command = "REPLY"
+        if command != "FETCH":
+            command = "REPLY"
 
-    return (command, args)
+        return (command, args)
 
 
 # If we decide to incorporate ChatGPT
@@ -79,3 +82,7 @@ def GPTResponse(inputText):
         messages.append({"role": "user", "content": text})
         
     return out
+
+if __name__ == "__main__":
+    dff = dialogeFlowInterface()
+    print(dff.dialogFlowProcess("fetch ball from kitchen"))

@@ -1,29 +1,32 @@
 import rospy
-from Bocelli.src.andrea import interactions
-from Bocelli.srv import Request, RequestResponse
+from bocelli.andrea import interactions
+from bocelli.srv import Request, RequestResponse
 
 # ROS node to interface with dialogFlow and chatGPT
 class Andrea:
     def __init__(self):
 
+        self.dfInterface = interactions.dialogeFlowInterface()
+
         self.services = {
             "df_request": rospy.Service('df_request', Request, self._onDfRequest),
-            "cmm_request": rospy.Service('df_request', Request, self._onCmmRequest),
+            "cmd_request": rospy.Service('cmd_request', Request, self._onCmmRequest),
             "gpt_request":rospy.Service('gpt_request',  Request, self._onGPTRequest)
         }
     
     def _onGPTRequest(self, msg):
-        reply = interactions.GPTResponse(msg)
+        reply = interactions.GPTResponse(msg.request)
         
         return RequestResponse(reply[1])
     
     def _onDfRequest(self, msg):
-        reply = interactions.dialogeFlowProcess(msg)
         
-        return RequestResponse(reply)
+        reply = self.dfInterface.dialogFlowProcess(msg.request)
+
+        return RequestResponse(reply.split(":"))
     
     def _onCmmRequest(self, msg):
-        reply = interactions.processUserCommand(msg)
+        reply = self.dfInterface.processUserCommand(msg.request)
         
         return RequestResponse(reply)    
 
