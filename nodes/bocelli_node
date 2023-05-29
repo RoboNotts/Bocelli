@@ -5,7 +5,7 @@ from bocelli.bocelli.bocelli import Bocelli
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Bocelli provides a simple node to speak and listen to people")
-
+    parser.add_argument('-m', '--micname', help='Name of Wanted microphone')
     args = parser.parse_args()
 
-    Bocelli.main()
+    Bocelli.main(args.micname)
