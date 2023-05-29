@@ -6,8 +6,11 @@ from bocelli.srv import Listen, Speak, SpeakResponse, ListenResponse
 
 # ROS node to interface with speaking/listening
 class Bocelli:
-    def __init__(self):
-        self.speaker = Speaker()
+    def __init__(self, micName):
+        if micName != None:
+            self.speaker = Speaker(micName)
+        else:
+            self.speaker = Speaker()
 
         self.services = {
             "speak_request": rospy.Service('speak', Speak, self._onSpeechRequest),
@@ -20,11 +23,13 @@ class Bocelli:
     
     def _onListenRequest(self, msg):
         result = self.speaker.listen(msg.duration)
+        print("REEEEEEEEEEEEESULT", result)
         out = ListenResponse()
         out.result = result
         return out
 
     def main(*args, **kwargs):
         rospy.init_node('bocelli')
-        d = Bocelli()
+        print(args[0])
+        d = Bocelli(args[0])
         rospy.spin()

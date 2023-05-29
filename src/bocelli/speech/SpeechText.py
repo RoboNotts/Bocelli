@@ -2,6 +2,7 @@ import speech_recognition as sr
 from gtts import gTTS
 from tempfile import TemporaryFile
 from pygame import mixer
+import pyaudio
 from time import sleep
 
 # APPROXIMATE READING TIME
@@ -16,10 +17,22 @@ def speakDuration(text):
 # Provides speaking and listening services
 class Speaker:
     
-    def __init__(self):
+    def __init__(self, micName = ""):
         self.r = sr.Recognizer()
+        if micName != "":
+            try:
+                print(sr.Microphone.list_microphone_names())
+                index = sr.Microphone.list_microphone_names().index(micName)
+                self.mic = sr.Microphone(index)
+                self.adjustMicrophone(3)
+                return
+                
+            except ValueError:
+                print("Specified Mic not found. Defaulting...")
+                
         self.mic = sr.Microphone()
         self.adjustMicrophone(3)
+
 
     # Uses text-to-speech to say something
     def speak(self, text):
@@ -45,10 +58,17 @@ class Speaker:
     # Listens for a set amount of time, and returns what was said to it.
     def listen(self, dur):
         with self.mic as source:
+            print("")
             print("listening") #prints
             audio = self.r.listen(source)
-            text = self.r.recognize_google(audio)
-            print("done")
+            try:
+                text = self.r.recognize_google(audio, language='en-GB')
+                if text == []:
+                    raise Exception
+            except Exception as e:
+                print("There was an error while listening. Try again")
+                text = "?"
+            
         return text
 
     def test(self):
