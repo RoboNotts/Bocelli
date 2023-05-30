@@ -1,5 +1,5 @@
 <?xml version='1.0'?>
 <launch>
-    <node pkg='bocelli' type='bocelli_node' />
-    <node pkg='bocelli' type='andrea_node' />
+    <node pkg='bocelli' name='bocelli_node' />
+    <node pkg='bocelli' name='andrea_node' />
 </launch>
