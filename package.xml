@@ -53,6 +53,7 @@
   <build_export_depend>rospy</build_export_depend>
   <exec_depend>rospy</exec_depend>
   <depend>std_msgs</depend>
+  <build_depend>roslaunch</build_depend>
 
   <build_export_depend>python-speechrecognition-pip</build_export_depend>
   <exec_depend>python-speechrecognition-pip</exec_depend>
