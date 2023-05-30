@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-
+import sys
 import argparse
 from bocelli.andrea.andrea import Andrea
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Andrea provides a simple service interface to dialogFlow")
 
-    args = parser.parse_args()
+    print(sys.argv)
+
+    args = parser.parse_args(sys.argv[4:])
 
     Andrea.main()

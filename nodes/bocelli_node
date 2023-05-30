@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-
+import sys
 import argparse
 from bocelli.bocelli.bocelli import Bocelli
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Bocelli provides a simple node to speak and listen to people")
     parser.add_argument('-m', '--micname', help='Name of Wanted microphone')
-    args = parser.parse_args()
+
+    args = parser.parse_args(sys.argv[4:])
 
     Bocelli.main(args.micname)
