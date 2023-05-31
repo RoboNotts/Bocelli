@@ -17,7 +17,7 @@ class Andrea:
     def _onGPTRequest(self, msg):
         reply = interactions.GPTResponse(msg.request)
         
-        return RequestResponse(reply[2])
+        return RequestResponse(reply[1])
     
     def _onDfRequest(self, msg):
         
