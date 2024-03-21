@@ -9,9 +9,9 @@ sounddevice
 pydub  
 
 ## TODO
-- [] Audio Buffer/Queue system
-- [] Text Buffer
-- [] ROS implementation
-- [] Keyword trigger
-- [] Multithreading???
-- [] idk
+- [ ] Audio Buffer/Queue system
+- [ ] Text Buffer
+- [ ] ROS implementation
+- [ ] Keyword trigger
+- [ ] Multithreading???
+- [ ] idk
